@@ -16,6 +16,15 @@ def value(pi_1, pi_2):
     value = nume/denom
     return value
 
+def softmax_param(theta = np.array([[100],[0]])):
+    theta_1 = theta[0][0]
+    theta_2 = theta[1][0]
+    policy = np.zeros((2,1))
+    policy[0][0] = np.exp(theta_1)/(np.exp(theta_1)+np.exp(theta_2))
+    policy[1][0] = np.exp(theta_2)/(np.exp(theta_1)+np.exp(theta_2))
+
+    return policy
+
 def grad_x(pi_1, pi_2):
     denom = np.square(np.dot(pi_1.T, np.dot(stop_prob(), pi_2))[0][0])
     nume = np.dot(reward(), pi_2)*np.dot(pi_1.T, np.dot(stop_prob(), pi_2))[0][0]\
@@ -29,6 +38,58 @@ def grad_y(pi_1, pi_2):
             - np.dot(stop_prob().T, pi_1)*np.dot(pi_1.T, np.dot(reward(), pi_2))[0][0]
     grad = nume/denom
     return grad
+
+def derivative_theta_1(theta):
+    theta_1 = theta[0][0]
+    theta_2 = theta[1][0]
+
+    dx_dtheta_1 = np.zeros((2,1))
+    dx_dtheta_1[0][0] = (np.exp(theta_1) * np.exp(theta_2))/np.square(np.exp(theta_1)+np.exp(theta_2))
+    dx_dtheta_1[1][0] = - dx_dtheta_1[0][0]
+    return dx_dtheta_1
+
+def derivative_theta_2(theta):
+    theta_1 = theta[0][0]
+    theta_2 = theta[1][0]
+
+    dx_dtheta_2 = np.zeros((2,1))
+    dx_dtheta_2[0][0] = -(np.exp(theta_1) * np.exp(theta_2))/np.square(np.exp(theta_1)+np.exp(theta_2))
+    dx_dtheta_2[1][0] = -dx_dtheta_2[0][0]
+    return dx_dtheta_2
+
+def grad_x_theta(theta_1, theta_2):
+    pi_1 = softmax_param(theta_1)
+    pi_2 = softmax_param(theta_2)
+
+    par_Vx_theta = np.zeros((2,1))
+
+    denom = np.square(np.dot(pi_1.T, np.dot(stop_prob(), pi_2))[0][0])
+    nume_0 = np.dot(reward(), pi_2)*np.dot(pi_1.T, np.dot(stop_prob(), pi_2))[0][0]\
+            - np.dot(stop_prob(), pi_2)*np.dot(pi_1.T, np.dot(reward(), pi_2))[0][0]
+    nume = np.dot(derivative_theta_1(theta = theta_1).T, nume_0)[0][0]
+    par_Vx_theta[0][0] = nume/denom
+
+    nume = np.dot(derivative_theta_2(theta = theta_1).T, nume_0)[0][0]
+    par_Vx_theta[1][0] = nume/denom
+
+    return par_Vx_theta
+
+def grad_y_theta(theta_1, theta_2):
+    pi_1 = softmax_param(theta_1)
+    pi_2 = softmax_param(theta_2)
+
+    par_Vy_theta = np.zeros((2,1))
+
+    denom = np.square(np.dot(pi_1.T, np.dot(stop_prob(), pi_2))[0][0])
+    nume_0 = np.dot(reward().T, pi_1)*np.dot(pi_1.T, np.dot(stop_prob(), pi_2))[0][0]\
+            - np.dot(stop_prob().T, pi_1)*np.dot(pi_1.T, np.dot(reward(), pi_2))[0][0]
+    nume = np.dot(derivative_theta_1(theta = theta_2).T, nume_0)[0][0]
+    par_Vy_theta[0][0] = nume/denom
+
+    nume = np.dot(derivative_theta_2(theta = theta_2).T, nume_0)[0][0]
+    par_Vy_theta[1][0] = nume/denom
+
+    return par_Vy_theta
 
 def primal_gap(pi_1, pi_2):
     # return \max_{y^\prime} V(x^i, y^\prime) - V(x^*, y^*)
@@ -75,4 +136,6 @@ if __name__ == "__main__":
     # pi2_0 = np.array([[1], [0]])
     # print(value(pi1_0, pi2_0))
 
-    MVI()
+    # MVI()
+    # print(softmax_param())
+    print(derivative_theta_2(np.array([[3], [4]])))
