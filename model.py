@@ -57,6 +57,21 @@ def derivative_theta_2(theta):
     dx_dtheta_2[1][0] = -dx_dtheta_2[0][0]
     return dx_dtheta_2
 
+def fisher_matrix(theta):
+    pi_a1 = softmax_param(theta)[0][0]
+    pi_a2 = softmax_param(theta)[1][0]
+
+    fisher = np.zeros((2,2))
+
+    #compute nabla log and fisher matrix
+    nabla_1 = (1/pi_a1) * derivative_theta_1(theta)
+    M1 = np.dot(nabla_1, nabla_1.T)
+    nabla_2 = (1/pi_a2) * derivative_theta_2(theta)
+    M2 = np.dot(nabla_2, nabla_2.T)
+
+    fisher = pi_a1 * M1 + pi_a2 * M2
+    return fisher
+
 def grad_x_theta(theta_1, theta_2):
     pi_1 = softmax_param(theta_1)
     pi_2 = softmax_param(theta_2)
