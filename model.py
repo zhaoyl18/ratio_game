@@ -2,12 +2,14 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 
-def reward(epsilon = 0.1):
-    R = np.array([[-1, epsilon], [-epsilon, 0]])
+def reward(epsilon = 0.3): # defalut epsilon = 0.1
+    R = np.array([[1, 0.5], [-0.5, 0]])
+    # R = np.array([[1, epsilon], [-epsilon, 0]])
     return R
 
-def stop_prob(s = 0.3):
-    S = np.array([[s, s], [1, 1]])
+def stop_prob(s = 0.3): # defalut s = 0.3
+    S = np.array([[1, 1], [0.1, 0.1]])
+    # S = np.array([[s, s], [1, 1]])
     return S
 
 def value(pi_1, pi_2):
@@ -20,8 +22,17 @@ def softmax_param(theta = np.array([[100],[0]])):
     theta_1 = theta[0][0]
     theta_2 = theta[1][0]
     policy = np.zeros((2,1))
-    policy[0][0] = np.exp(theta_1)/(np.exp(theta_1)+np.exp(theta_2))
-    policy[1][0] = np.exp(theta_2)/(np.exp(theta_1)+np.exp(theta_2))
+    if theta_1 - theta_2 > 100:
+        policy[0][0] = 1.0
+        policy[1][0] = 0.0
+        return policy
+    if theta_2 - theta_1 > 100:
+        policy[0][0] = 0.0
+        policy[1][0] = 1.0
+        return policy
+    log_sum = np.logaddexp(theta_1, theta_2)
+    policy[0][0] = np.exp(theta_1)/(np.exp(log_sum))
+    policy[1][0] = 1.0 - policy[0][0]
 
     return policy
 
