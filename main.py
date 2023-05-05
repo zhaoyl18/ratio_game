@@ -4,7 +4,6 @@ plt.figure(dpi=1200)
 
 from model import reward, stop_prob, value, grad_x, grad_y, primal_gap, primal_dual_gap
 from model import grad_x_theta, grad_y_theta, softmax_param
-from train_softmax import softmax_train
 
 def policy_2(theta, z1, z2):
     pi1 = softmax_param(theta)
@@ -89,11 +88,11 @@ def train(eta = 0.05, iterations = 5000):
     plt.xlabel("Iterations")
     plt.ylabel("Value")
     plt.title("stepsize= %.2f" % eta)
-    # plt.show()
-    plt.savefig("stepsize= %.2f.png" % eta)
+    plt.show()
+    # plt.savefig("stepsize= %.2f.png" % eta)
     
 
-train()
+train(eta = 0.05, iterations = 5000)
 
 
 
