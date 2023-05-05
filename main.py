@@ -87,7 +87,7 @@ def train(eta = 0.05, iterations = 5000):
     plt.legend(["Sequential policy updates", "Independent PG"])
     plt.xlabel("Iterations")
     plt.ylabel("Value")
-    plt.title("stepsize= %.2f" % eta)
+    plt.title("stepsize=%.2f" % eta)
     plt.show()
     # plt.savefig("stepsize= %.2f.png" % eta)
     

@@ -28,7 +28,7 @@ Both policies are uniformly initialized, stepsize is 0.001.
 Both policies are uniformly initialized, stepsize is 0.01.
 ![image](https://github.com/zhaoyl18/ratio_game/blob/main/stepsize= 0.01.png)
 
-### f
+### (f)
 
 Both policies are uniformly initialized, stepsize is 0.005.
 ![image](https://github.com/zhaoyl18/ratio_game/blob/main/stepsize= 0.05.png)
