@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from model import reward, stop_prob, value, grad_x, grad_y, primal_gap, primal_dual_gap
-from tools import project
+from archive.tools import project
 
 res = list()
 rewards = list()

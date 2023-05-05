@@ -1,7 +1,9 @@
 # ratio game
 
-Implementations for the numerical simulation in paper [Local Optimization Achieves Global Optimality in Multi-Agent Reinforcement
-Learning](https://openreview.net/forum?id=V4jD1KmnQz). We implement and compare: (1) our algorithm with sequential policy updates and (2) the[independent policy gradient method](https://papers.nips.cc/paper/2020/file/3b2acfe2e38102074656ed938abf4ac3-Paper.pdf). We study von Neumann's ratio game, a very simple stochastic game. Plots for the six settings are shown below.
+Implementation for the numerical simulation in paper [Local Optimization Achieves Global Optimality in Multi-Agent Reinforcement
+Learning](https://openreview.net/forum?id=V4jD1KmnQz). 
+
+We study von Neumann's ratio game, a very simple stochastic game. We implement and compare two algorithms: (1) our algorithm with sequential policy updates and (2) the [independent policy gradient method](https://papers.nips.cc/paper/2020/file/3b2acfe2e38102074656ed938abf4ac3-Paper.pdf). Results are shown below.
 
 ## (a)
 
