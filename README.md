@@ -4,8 +4,11 @@ Implementation for the numerical simulation in: [Local Optimization Achieves Glo
 Learning](https://arxiv.org/abs/2305.04819) 
 
 We study von Neumann's ratio game, a very simple stochastic game. We implement and compare two algorithms:
+
 (1) our algorithm with sequential policy updates 
+
 (2) Independent policy gradient algorithm, e.g. this [paper](https://papers.nips.cc/paper/2020/file/3b2acfe2e38102074656ed938abf4ac3-Paper.pdf). 
+
 Results are shown below.
 
 ## (a)
