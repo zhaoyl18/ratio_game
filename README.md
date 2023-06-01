@@ -1,7 +1,7 @@
 # ratio game
 
-Implementation for the numerical simulation in: [Local Optimization Achieves Global Optimality in Multi-Agent Reinforcement
-Learning](https://arxiv.org/abs/2305.04819) 
+Coding implementation for paper: [Local Optimization Achieves Global Optimality in Multi-Agent Reinforcement
+Learning](https://arxiv.org/abs/2305.04819) (ICML 2023)
 
 We study von Neumann's ratio game, a very simple stochastic game. We implement and compare two algorithms:
 
